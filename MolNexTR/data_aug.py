@@ -1,11 +1,11 @@
 """ data augmentation algriothm"""
 import albumentations as A
-from albumentations.augmentations.geometric.functional import safe_rotate_enlarged_img_size, _maybe_process_in_chunks, \
-                                                              keypoint_rotate
 import cv2
 import math
-import random
 import numpy as np
+import random
+from albumentations.augmentations.geometric.functional import _maybe_process_in_chunks, keypoint_rotate, \
+    safe_rotate_enlarged_img_size
 
 
 def safe_rotate(

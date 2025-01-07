@@ -3,3 +3,6 @@
 */.vscode
 */figure
 */requirements.txt
+*.pth
+*.egg-info/
+*notebooks/

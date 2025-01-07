@@ -37,13 +37,15 @@ conda env create -f environment.yml
 3. Download the model checkpoint from our [Hugging Face Repo](https://huggingface.co/datasets/CYF200127/MolNexTR/blob/main/molnextr_best.pth) or Zenodo Repo: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.13304899.svg)](https://doi.org/10.5281/zenodo.13304899) and put in your own path 
 
 4. Run the following code to predict molecular images:
+
 ```python
 import torch
-from MolNexTR import molnextr
+from MolNexTR import MolNexTR
+
 Image = './examples/1.png'
 Model = './checkpoints/molnextr_best.pth'
 device = torch.device('cpu')
-model = molnextr(Model, device)
+model = MolNexTR(Model, device)
 predictions = model.predict_final_results(Image, return_atoms_bonds=True)
 print(predictions)
 ```

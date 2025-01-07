@@ -1,1 +1,1 @@
-from .model import molnextr
+from .model import MolNexTR

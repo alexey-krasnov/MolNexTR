@@ -1,13 +1,11 @@
-import os
-import random
-import numpy as np
-import torch
-import math
-import time
 import datetime
 import json
-from json import encoder
-
+import math
+import numpy as np
+import os
+import random
+import time
+import torch
 
 FORMAT_INFO = {
     "inchi": {

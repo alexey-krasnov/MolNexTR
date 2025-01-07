@@ -16,13 +16,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from ctypes import (c_byte, c_char_p, c_double, c_float, c_int, c_ulonglong, CDLL, POINTER, pointer, RTLD_GLOBAL)
+
 import os
 import platform
 import sys
 import warnings
 from array import array
-from ctypes import (CDLL, POINTER, RTLD_GLOBAL, c_byte, c_char_p, c_double,
-                    c_float, c_int, c_ulonglong, pointer)
 
 DECODE_ENCODING = "utf-8"
 ENCODE_ENCODING = "utf-8"

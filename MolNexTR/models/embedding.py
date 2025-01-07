@@ -1,10 +1,8 @@
 """ Embeddings module """
 import math
-import warnings
-
 import torch
 import torch.nn as nn
-
+import warnings
 from onmt.modules.util_class import Elementwise
 
 

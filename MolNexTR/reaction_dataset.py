@@ -1,26 +1,17 @@
-import os
 import cv2
-import time
+import albumentations as A
+import cv2
+import numpy as np
 import random
 import re
 import string
-import numpy as np
-import pandas as pd
-import torch
-import torch.nn.functional as F
-from torch.utils.data import DataLoader, Dataset
-from torch.nn.utils.rnn import pad_sequence, pack_padded_sequence
-import albumentations as A
 from albumentations.pytorch import ToTensorV2
 
+from .abbrs import COLORS, ELEMENTS, RGROUP_SYMBOLS, SUBSTITUTIONS
+from .chemical import normalize_nodes
+from .data_aug import CropWhite, PadToSquare, PadWhite, SafeRotate, SaltAndPepperNoise
 from .indigo import Indigo
 from .indigo.renderer import IndigoRenderer
-
-from .data_aug import SafeRotate, CropWhite, PadWhite, SaltAndPepperNoise, PadToSquare,ConditionalPadToSquare
-from .utils import FORMAT_INFO
-from .tokenization import PAD_ID
-from .chemical import get_num_atoms, normalize_nodes
-from .abbrs import RGROUP_SYMBOLS, SUBSTITUTIONS, ELEMENTS, COLORS
 
 cv2.setNumThreads(1)
 

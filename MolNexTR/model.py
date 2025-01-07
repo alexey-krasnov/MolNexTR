@@ -1,18 +1,16 @@
 """model for MolNexTR"""
 
 import argparse
+import cv2
+import os
+import torch
 from typing import List
 
-import cv2
-import torch
-import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib.backends.backend_agg import FigureCanvasAgg
-
-from .dataset import get_transforms
-from .components import Encoder, Decoder
 from .chemical import convert_graph_to_smiles
+from .components import Decoder, Encoder
+from .dataset import get_transforms
 from .tokenization import get_tokenizer
+
 
 def loading(module, module_states):
     """
@@ -30,14 +28,14 @@ def loading(module, module_states):
 BOND_TYPES = ["", "single", "double", "triple", "aromatic", "solid wedge", "dashed wedge"]
 
 
-class molnextr:
+class MolNexTR:
     """
     Main Interface for MolNexTR to get predictions
     Args:
         model_path (str): Path to the saved model file.
         device (torch.device): Device to run the model on, defaults to CPU if None.
     """
-    def __init__(self, model_path, device=None):
+    def __init__(self, model_path, device=None, num_workers=1):
         model_states = torch.load(model_path, map_location=torch.device('cpu'))
         args = self._get_args(model_states['args'])
         if device is None:
@@ -46,11 +44,12 @@ class molnextr:
         self.tokenizer = get_tokenizer(args)
         self.encoder, self.decoder = self._get_model(args, self.tokenizer, self.device, model_states)
         self.transform = get_transforms(args.input_size, args.input_size, augment=False)
+        self.num_workers = num_workers
 
     def _get_args(self, args_states=None):
         parser = argparse.ArgumentParser()
         # Model
-        parser.add_argument('--encoder', type=str, default='convnext')
+        parser.add_argument('--encoder', type=str, default='swin_base')
         parser.add_argument('--decoder', type=str, default='transformer')
         parser.add_argument('--trunc_encoder', action='store_true')  # use the hidden states before downsample
         parser.add_argument('--no_pretrained', action='store_true')
@@ -112,8 +111,14 @@ class molnextr:
         node_symbols = [pred['chartok_coords']['symbols'] for pred in predictions]
         edges = [pred['edges'] for pred in predictions]
 
+        # Dynamically adjust num_workers based on the number of images in list
+        if len(input_images) <= 100:
+            self.num_workers = 1
+        else:
+            self.num_workers = os.cpu_count()
+
         smiles_list, molblock_list, r_success = convert_graph_to_smiles(
-            node_coords, node_symbols, edges, images=input_images)
+            node_coords, node_symbols, edges, images=input_images, num_workers=self.num_workers)
 
         outputs = []
         for smiles, molfile, pred in zip(smiles_list, molblock_list, predictions):

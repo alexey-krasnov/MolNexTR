@@ -1,8 +1,9 @@
 """ evealuation functions for MolNexTR """
-import numpy as np
 import multiprocessing
+import numpy as np
 import rdkit
 import rdkit.Chem as Chem
+
 rdkit.RDLogger.DisableLog('rdApp.*')
 from SmilesPE.pretokenizer import atomwise_tokenizer
 
