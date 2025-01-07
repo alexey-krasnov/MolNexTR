@@ -16,13 +16,13 @@ from torch.utils.data import DataLoader, RandomSampler, SequentialSampler
 from torch.utils.data.distributed import DistributedSampler
 from transformers import get_scheduler
 
-from MolNexTR.dataset import TrainDataset, AuxTrainDataset, bms_collate
-from MolNexTR.components import Encoder, Decoder
-from MolNexTR.loss_fuc import Criterion
-from MolNexTR.utils import seed_torch, save_args, init_summary_writer, LossMeter, AverageMeter, asMinutes, timeSince, \
+from molnextr.dataset import TrainDataset, AuxTrainDataset, bms_collate
+from molnextr.components import Encoder, Decoder
+from molnextr.loss_fuc import Criterion
+from molnextr.utils import seed_torch, save_args, init_summary_writer, LossMeter, AverageMeter, asMinutes, timeSince, \
     print_rank_0, format_df
-from MolNexTR.chemical import convert_graph_to_smiles, postprocess_smiles, keep_main_molecule
-from MolNexTR.tokenization import get_tokenizer
+from molnextr.chemical import convert_graph_to_smiles, postprocess_smiles, keep_main_molecule
+from molnextr.tokenization import get_tokenizer
 from evaluate import SmilesEvaluator
 
 import warnings

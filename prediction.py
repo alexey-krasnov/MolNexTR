@@ -1,7 +1,7 @@
 import argparse
 import json
 import torch
-from MolNexTR import MolNexTR
+from molnextr import MolNexTR
 
 import warnings 
 warnings.filterwarnings('ignore')

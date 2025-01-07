@@ -12,9 +12,9 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(
-    name="MolNexTR",
+    name="molnextr",
     version="1.0",
-    description="MolNexTR, a novel graph generation model. The model follows the encoder-decoder architecture, takes three-channel molecular images as input, outputs molecular graph structure prediction, and can be easily converted to SMILES.",
+    description="molnextr, a novel graph generation model. The model follows the encoder-decoder architecture, takes three-channel molecular images as input, outputs molecular graph structure prediction, and can be easily converted to SMILES.",
     long_description=long_description,
     license="Apache License 2.0",
     python_requires=">=3.10, <3.12",
@@ -26,6 +26,6 @@ setup(
     ],
     url="",
     packages=find_packages(),
-    package_dir={'MolNexTR': 'MolNexTR'},
+    package_dir={'molnextr': 'molnextr'},
     install_requires=read_requirements(),
 )

@@ -40,7 +40,7 @@ conda env create -f environment.yml
 
 ```python
 import torch
-from MolNexTR import MolNexTR
+from molnextr import MolNexTR
 
 Image = './examples/1.png'
 Model = './checkpoints/molnextr_best.pth'

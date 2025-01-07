@@ -1,4 +1,4 @@
-"""model for MolNexTR"""
+"""model for molnextr"""
 
 import argparse
 import cv2
@@ -30,7 +30,7 @@ BOND_TYPES = ["", "single", "double", "triple", "aromatic", "solid wedge", "dash
 
 class MolNexTR:
     """
-    Main Interface for MolNexTR to get predictions
+    Main Interface for molnextr to get predictions
     Args:
         model_path (str): Path to the saved model file.
         device (torch.device): Device to run the model on, defaults to CPU if None.

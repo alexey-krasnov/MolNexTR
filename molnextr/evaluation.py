@@ -1,4 +1,4 @@
-""" evealuation functions for MolNexTR """
+""" evealuation functions for molnextr """
 import multiprocessing
 import numpy as np
 import rdkit
