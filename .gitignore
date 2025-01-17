@@ -6,3 +6,4 @@
 *.pth
 *.egg-info/
 *notebooks/
+*.pyc
