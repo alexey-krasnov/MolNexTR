@@ -77,9 +77,6 @@ The output dictionary includes the atom sets, bond sets, predicted MolFile, and 
 }   
 ```
 
-
-
-
 ## Experiments
 
 ### Data preparation
