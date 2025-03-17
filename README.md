@@ -34,7 +34,8 @@ conda env create -f environment.yml
 ```
 
 
-3. Download the model checkpoint from our [Hugging Face Repo](https://huggingface.co/datasets/CYF200127/MolNexTR/blob/main/molnextr_best.pth) or Zenodo Repo: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.13304899.svg)](https://doi.org/10.5281/zenodo.13304899) and put in your own path 
+3. Download the model checkpoint from our [Hugging Face Repo](https://huggingface.co/datasets/CYF200127/MolNexTR/blob/main/molnextr_best.pth) or Zenodo Repo: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.13304899.svg)](https://doi.org/10.5281/zenodo.13304899) and put in your own path.
+Default folder for model is: [checkpoints](checkpoints).
 
 4. Run the following code to predict molecular images:
 
@@ -42,11 +43,11 @@ conda env create -f environment.yml
 import torch
 from molnextr import MolNexTR
 
-Image = './examples/1.png'
-Model = './checkpoints/molnextr_best.pth'
+image_path = './examples/1.png'
+model_path = './checkpoints/molnextr_best.pth'
 device = torch.device('cpu')
-model = MolNexTR(Model, device)
-predictions = model.predict_final_results(Image, return_atoms_bonds=True)
+model = MolNexTR(model_path, device)
+predictions = model.predict_image_files([image_path], return_atoms_bonds=True)
 print(predictions)
 ```
 or use [`prediction.ipynb`](prediction.ipynb). You can also change the image and model path to your own images and models.
