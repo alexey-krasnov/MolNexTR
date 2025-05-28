@@ -122,7 +122,7 @@ class MolNexTR:
 
         outputs = []
         for smiles, molfile, pred in zip(smiles_list, molblock_list, predictions):
-            pred_dict = {"predicted_smiles": smiles, "predicted_molfile": molfile}
+            pred_dict = {"smiles": smiles, "molfile": molfile}
             if return_atoms_bonds:
                 coords = pred['chartok_coords']['coords']
                 symbols = pred['chartok_coords']['symbols']
