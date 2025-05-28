@@ -1,19 +1,17 @@
 """ vision transfomers models"""
 import logging
 import math
-from copy import deepcopy
-from typing import Optional
-
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.utils.checkpoint as checkpoint
-
+from copy import deepcopy
 from timm.data import IMAGENET_DEFAULT_MEAN, IMAGENET_DEFAULT_STD
 from timm.models.helpers import build_model_with_cfg, overlay_external_default_cfg
-from timm.models.layers import Mlp, DropPath, to_2tuple, trunc_normal_
+from timm.models.layers import DropPath, Mlp, to_2tuple, trunc_normal_
 from timm.models.registry import register_model
-from timm.models.vision_transformer import checkpoint_filter_fn, _init_vit_weights
+from timm.models.vision_transformer import _init_vit_weights, checkpoint_filter_fn
+from typing import Optional
 
 _logger = logging.getLogger(__name__)
 

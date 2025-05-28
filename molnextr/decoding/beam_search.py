@@ -1,4 +1,5 @@
 import torch
+
 from .decode_strategy import DecodeStrategy
 
 

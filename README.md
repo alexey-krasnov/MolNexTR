@@ -20,7 +20,7 @@ git clone https://github.com/CYF2000127/MolNexTR
 ### Example usage of the model
 1. First create and activate a [conda](https://numdifftools.readthedocs.io/en/stable/how-to/create_virtual_env_with_conda.html) environment with the following command in a Linux, Windows, or MacOS environment (Linux is the most recommended):
 ```
-conda create -n molnextr python=3.8
+conda create -n molnextr python<3.12
 conda activate molnextr
 ```
 
@@ -34,17 +34,20 @@ conda env create -f environment.yml
 ```
 
 
-3. Download the model checkpoint from our [Hugging Face Repo](https://huggingface.co/datasets/CYF200127/MolNexTR/blob/main/molnextr_best.pth) or Zenodo Repo: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.13304899.svg)](https://doi.org/10.5281/zenodo.13304899) and put in your own path 
+3. Download the model checkpoint from our [Hugging Face Repo](https://huggingface.co/datasets/CYF200127/MolNexTR/blob/main/molnextr_best.pth) or Zenodo Repo: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.13304899.svg)](https://doi.org/10.5281/zenodo.13304899) and put in your own path.
+Default folder for model is: [checkpoints](checkpoints).
 
 4. Run the following code to predict molecular images:
+
 ```python
 import torch
-from MolNexTR import molnextr
-Image = './examples/1.png'
-Model = './checkpoints/molnextr_best.pth'
+from molnextr import MolNexTR
+
+image_path = './examples/1.png'
+model_path = './checkpoints/molnextr_best.pth'
 device = torch.device('cpu')
-model = molnextr(Model, device)
-predictions = model.predict_final_results(Image, return_atoms_bonds=True)
+model = MolNexTR(model_path, device)
+predictions = model.predict_image_files([image_path], return_atoms_bonds=True)
 print(predictions)
 ```
 or use [`prediction.ipynb`](prediction.ipynb). You can also change the image and model path to your own images and models.
@@ -73,9 +76,6 @@ The output dictionary includes the atom sets, bond sets, predicted MolFile, and 
     'predicted_smiles': 'COC1CCCc2oc(-c3ccccc3)cc21'
 }   
 ```
-
-
-
 
 ## :fire: Experiments
 

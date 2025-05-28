@@ -15,9 +15,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from ctypes import c_char_p, c_int, CDLL, POINTER
+
 import os
 import platform
-from ctypes import CDLL, POINTER, c_char_p, c_int
 
 from . import IndigoException
 

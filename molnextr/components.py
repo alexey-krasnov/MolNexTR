@@ -1,15 +1,15 @@
 """ model components"""
 import numpy as np
+import timm
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-import timm
-
+from .decoding import BeamSearch, GreedySearch
+from .models import Embeddings, TransformerDecoder
+from .tokenization import EOS_ID, MASK_ID, PAD_ID, SOS_ID
 from .utils import FORMAT_INFO, to_device
-from .tokenization import SOS_ID, EOS_ID, PAD_ID, MASK_ID
-from .decoding import GreedySearch, BeamSearch
-from .models import TransformerDecoder, Embeddings
+
 
 class _PositionAttentionModule(nn.Module):
     """ Position attention module"""

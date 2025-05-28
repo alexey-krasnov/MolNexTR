@@ -1,8 +1,8 @@
 """tokenizer for output sequence"""
-import os
 import json
-import random
 import numpy as np
+import os
+import random
 from SmilesPE.pretokenizer import atomwise_tokenizer
 
 # Define special token IDs and corresponding strings
