@@ -19,7 +19,7 @@ rdkit>=2024.3.5
 SmilesPE==0.0.3
 OpenNMT-py==2.2.0
 tensorboardX>=2.6.2.2
-timm==0.4.12
-torch>=2.0.1
+timm>=0.4.12,<=0.5.4
+torch>=2.0.1,<=2.7.1
 # Only this version of transformers are compatible with timm
-transformers>=4.5.1,<=4.47.0
+transformers>=4.5.1,<=4.52.4
