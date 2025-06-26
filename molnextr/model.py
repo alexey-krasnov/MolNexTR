@@ -194,6 +194,10 @@ class MolNexTR:
         return self.predict_images(
             input_images, return_atoms_bonds=return_atoms_bonds, return_confidence=return_confidence)
 
+    def predict_image_file(self, image_file: str, return_atoms_bonds=False, return_confidence=False):
+        return self.predict_image_files(
+            [image_file], return_atoms_bonds=return_atoms_bonds, return_confidence=return_confidence)[0]
+
     def predict_final_results(self, image_file: str, return_atoms_bonds=False, return_confidence=False):
         """
         Predicts SMILES and molecular structure from a single image file path.

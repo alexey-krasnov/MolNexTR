@@ -47,7 +47,13 @@ image_path = './examples/1.png'
 model_path = './checkpoints/molnextr_best.pth'
 device = torch.device('cpu')
 model = MolNexTR(model_path, device)
-predictions = model.predict_image_files([image_path], return_atoms_bonds=True)
+
+# For single image use `predict_image_file()` method
+predictions = model.predict_image_file(image_path, return_atoms_bonds=True) 
+
+# For multiple image files `predict_image_files()` method
+predictions = model.predict_image_files([image_path_1, image_path_2], return_atoms_bonds=True)
+
 print(predictions)
 ```
 or use [`prediction.ipynb`](prediction.ipynb). You can also change the image and model path to your own images and models.
