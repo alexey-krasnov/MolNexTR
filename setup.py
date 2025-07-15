@@ -13,7 +13,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="molnextr",
-    version="1.0",
+    version="1.1",
     description="MolNexTR, a novel graph generation model. The model follows the encoder-decoder architecture, takes three-channel molecular images as input, outputs molecular graph structure prediction, and can be easily converted to SMILES.",
     long_description=long_description,
     license="Apache License 2.0",
