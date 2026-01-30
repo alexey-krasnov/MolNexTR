@@ -5,9 +5,6 @@ from typing import List
 
 import cv2
 import torch
-import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib.backends.backend_agg import FigureCanvasAgg
 
 from molnextr.dataset import get_transforms
 from molnextr.components import Encoder, Decoder

@@ -6,7 +6,6 @@ import math
 import time
 import datetime
 import json
-from json import encoder
 
 
 FORMAT_INFO = {
