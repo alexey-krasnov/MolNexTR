@@ -38,11 +38,22 @@ pip install git+https://github.com/CYF2000127/MolNexTR
 3. Run the following code to predict molecular images:
 
 ```python
-import molnextr
+import torch
+from molnextr import MolNexTR
 
-Image = './examples/1.png'
-predictions = molnextr.get_predictions(Image, atoms_bonds=True, smiles=True,
-                                       predicted_molfile=True)  # atoms_bonds and predicted_molfile are optional
+image_path = './examples/1.png'
+model_path = './checkpoints/molnextr_best.pth'
+device = torch.device('cpu')
+model = MolNexTR(model_path, device)
+
+# For single image use `predict_image_file()` method
+prediction = model.predict_image_file(image_path, return_atoms_bonds=True) 
+
+# For multiple image files `predict_image_files()` method
+image_path_1 = './examples/1.png'
+image_path_2 = './examples/2.png'
+predictions = model.predict_image_files([image_path_1, image_path_2], return_atoms_bonds=True)
+
 print(predictions)
 ```
 or use [`prediction.ipynb`](prediction.ipynb). You can also change the image and model path to your images and models.
@@ -71,9 +82,6 @@ The output dictionary includes the atom sets, bond sets, predicted MolFile, and 
     'predicted_smiles': 'COC1CCCc2oc(-c3ccccc3)cc21'
 }   
 ```
-
-
-
 
 ## :fire: Experiments
 
