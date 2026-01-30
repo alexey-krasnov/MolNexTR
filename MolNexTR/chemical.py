@@ -1,5 +1,6 @@
 """ chemical rules"""
 import copy
+import itertools
 import traceback
 import numpy as np
 import multiprocessing
@@ -10,6 +11,7 @@ from SmilesPE.pretokenizer import atomwise_tokenizer
 from MolNexTR.abbrs import RGROUP_SYMBOLS, ABBREVIATIONS, VALENCES, FORMULA_REGEX,SUBSTITUTIONS
 import difflib
 import re
+from rdkit.Chem import rdDepictor, rdFMCS
 
 
 
