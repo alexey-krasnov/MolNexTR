@@ -1,8 +1,6 @@
 import os
-import sys
 import time
 import json
-import random
 import argparse
 import datetime
 import numpy as np

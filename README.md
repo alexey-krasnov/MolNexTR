@@ -16,6 +16,7 @@ Overview of our MolNexTR model.
 ## Using the code and the model
 
 Note: Models could be downloaded from [Hugging Face Repo](https://huggingface.co/datasets/CYF200127/MolNexTR/blob/main/molnextr_best.pth) or Zenodo Repo: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.13304899.svg)](https://doi.org/10.5281/zenodo.13304899) 
+Default folder for model is: [checkpoints](checkpoints).
 
 ### Using the code
 Clone the following repositories:

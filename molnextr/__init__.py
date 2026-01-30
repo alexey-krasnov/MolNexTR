@@ -5,4 +5,4 @@ __all__ = [
     "MolNexTRSingleton",
 ]
 
-from .molnextr import get_predictions, MolNexTRSingleton
+from .molnextr import get_predictions, MolNexTRSingleton, MolNexTR
