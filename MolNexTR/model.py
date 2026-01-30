@@ -37,7 +37,7 @@ class molnextr:
         model_path (str): Path to the saved model file.
         device (torch.device): Device to run the model on, defaults to CPU if None.
     """
-    def __init__(self, model_path, device=None):
+    def __init__(self, model_path, device=None, num_workers=1):
         model_states = torch.load(model_path, map_location=torch.device('cpu'))
         args = self._get_args(model_states['args'])
         if device is None:
@@ -46,6 +46,11 @@ class molnextr:
         self.tokenizer = get_tokenizer(args)
         self.encoder, self.decoder = self._get_model(args, self.tokenizer, self.device, model_states)
         self.transform = get_transforms(args.input_size, args.input_size, augment=False)
+
+        self.num_workers = num_workers
+        # Apple's MPS-specific optimizations
+        self.is_mps = str(device).startswith('mps')
+        self.optimal_batch_size = 32 if self.is_mps else 16
 
     def _get_args(self, args_states=None):
         parser = argparse.ArgumentParser()
@@ -94,7 +99,13 @@ class molnextr:
         decoder.eval()
         return encoder, decoder
 
-    def predict_images(self, input_images: List, return_atoms_bonds=False, return_confidence=False, batch_size=16):
+    def predict_images(self, input_images: List, return_atoms_bonds=False, return_confidence=False, batch_size=None):
+        """
+         Optimized version of predict_images with better MPS performance
+         """
+        if batch_size is None:
+            batch_size = self.optimal_batch_size
+
         device = self.device
         predictions = []
         self.decoder.compute_confidence = return_confidence
@@ -113,11 +124,11 @@ class molnextr:
         edges = [pred['edges'] for pred in predictions]
 
         smiles_list, molblock_list, r_success = convert_graph_to_smiles(
-            node_coords, node_symbols, edges, images=input_images)
+            node_coords, node_symbols, edges, images=input_images, num_workers=self.num_workers)
 
         outputs = []
         for smiles, molfile, pred in zip(smiles_list, molblock_list, predictions):
-            pred_dict = {"predicted_smiles": smiles, "predicted_molfile": molfile}
+            pred_dict = {"smiles": smiles, "molfile": molfile}
             if return_atoms_bonds:
                 coords = pred['chartok_coords']['coords']
                 symbols = pred['chartok_coords']['symbols']
@@ -180,7 +191,7 @@ class molnextr:
         return self.predict_images(
             input_images, return_atoms_bonds=return_atoms_bonds, return_confidence=return_confidence)
 
-    def predict_final_results(self, image_file: str, return_atoms_bonds=False, return_confidence=False):
+    def predict_image_file(self, image_file: str, return_atoms_bonds=False, return_confidence=False):
         """
         Predicts SMILES and molecular structure from a single image file path.
         

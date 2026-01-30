@@ -15,7 +15,7 @@ if __name__ == "__main__":
 
     device = torch.device('cuda')
     model = molnextr(args.model_path, device)
-    output = model.predict_final_results(
+    output = model.predict_image_file(
         args.image_path, return_atoms_bonds=args.return_atoms_bonds, return_confidence=args.return_confidence)
     for key, value in output.items():
         print(f"{key}:")

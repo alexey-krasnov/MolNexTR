@@ -251,7 +251,7 @@ def get_predictions(
     # Get predictions with atoms_bonds if requested
     try:
         logger.debug("Running prediction...")
-        predictions = model.predict_final_results(imagepath, return_atoms_bonds=atoms_bonds)
+        predictions = model.predict_image_file(imagepath, return_atoms_bonds=atoms_bonds)
         logger.debug("Prediction successful")
     except Exception as e:
         logger.error(f"Prediction failed: {str(e)}")
@@ -265,7 +265,7 @@ def get_predictions(
         # Get fresh model instance with CPU
         model = MolNexTRSingleton.get_instance()
         logger.debug("Running prediction with CPU fallback...")
-        predictions = model.predict_final_results(imagepath, return_atoms_bonds=atoms_bonds)
+        predictions = model.predict_image_file(imagepath, return_atoms_bonds=atoms_bonds)
     
     # Track memory after prediction
     if torch.cuda.is_available():
