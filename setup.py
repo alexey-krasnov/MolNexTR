@@ -6,17 +6,17 @@ def read_requirements():
         return fh.read().splitlines()
 
 setuptools.setup(
-    name="MolNexTR",
+    name="molnextr",
     version="1.0.2",
-    description="MolNexTR, a novel graph generation model",
+    description="molnextr, a novel graph generation model",
     entry_points={
-        "console_scripts": ["molnextr = MolNexTR.molnextr:main"],
+        "console_scripts": ["molnextr = molnextr.molnextr:main"],
     },
     url="https://github.com/CYF2000127/MolNexTR",
     packages=setuptools.find_packages(),
     license="Apache License 2.0",
     install_requires=read_requirements(),
-    package_data={"MolNexTR": ["decoding/*.*", "indigo/*.*", "models/*.*","vocab/*.*"]},
+    package_data={"molnextr": ["decoding/*.*", "indigo/*.*", "models/*.*","vocab/*.*"]},
     classifiers=[
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",

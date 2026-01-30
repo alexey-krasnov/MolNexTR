@@ -1,4 +1,4 @@
-"""model for MolNexTR"""
+"""model for molnextr"""
 
 import argparse
 from typing import List
@@ -9,10 +9,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_agg import FigureCanvasAgg
 
-from MolNexTR.dataset import get_transforms
-from MolNexTR.components import Encoder, Decoder
-from MolNexTR.chemical import convert_graph_to_smiles
-from MolNexTR.tokenization import get_tokenizer
+from molnextr.dataset import get_transforms
+from molnextr.components import Encoder, Decoder
+from molnextr.chemical import convert_graph_to_smiles
+from molnextr.tokenization import get_tokenizer
 
 def loading(module, module_states):
     """
@@ -30,7 +30,7 @@ def loading(module, module_states):
 BOND_TYPES = ["", "single", "double", "triple", "aromatic", "solid wedge", "dashed wedge"]
 
 
-class molnextr:
+class MolNexTR:
     """
     Main Interface for MolNexTR to get predictions
     Args:

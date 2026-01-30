@@ -13,14 +13,14 @@ from torch.nn.utils.rnn import pad_sequence, pack_padded_sequence
 import albumentations as A
 from albumentations.pytorch import ToTensorV2
 
-from MolNexTR.indigo import Indigo
-from MolNexTR.indigo.renderer import IndigoRenderer
+from molnextr.indigo import Indigo
+from molnextr.indigo.renderer import IndigoRenderer
 
-from MolNexTR.data_aug import SafeRotate, CropWhite, PadWhite, AddIncompleteStructuralNoise, AddBondNoise, SaltAndPepperNoise, PadToSquare, AddLineNoise, AddEdgeElementSymbolNoise, DrawBorder
-from MolNexTR.utils import FORMAT_INFO
-from MolNexTR.tokenization import PAD_ID
-from MolNexTR.chemical import get_num_atoms, normalize_nodes
-from MolNexTR.abbrs import RGROUP_SYMBOLS, SUBSTITUTIONS, ELEMENTS, COLORS
+from molnextr.data_aug import SafeRotate, CropWhite, PadWhite, AddIncompleteStructuralNoise, AddBondNoise, SaltAndPepperNoise, PadToSquare, AddLineNoise, AddEdgeElementSymbolNoise, DrawBorder
+from molnextr.utils import FORMAT_INFO
+from molnextr.tokenization import PAD_ID
+from molnextr.chemical import get_num_atoms, normalize_nodes
+from molnextr.abbrs import RGROUP_SYMBOLS, SUBSTITUTIONS, ELEMENTS, COLORS
 
 cv2.setNumThreads(1)
 

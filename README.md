@@ -35,10 +35,13 @@ pip install git+https://github.com/CYF2000127/MolNexTR
 ```
 
 3. Run the following code to predict molecular images:
+
 ```python
-import MolNexTR
+import molnextr
+
 Image = './examples/1.png'
-predictions = MolNexTR.get_predictions(Image, atoms_bonds=True, smiles=True, predicted_molfile=True) # atoms_bonds and predicted_molfile are optional
+predictions = molnextr.get_predictions(Image, atoms_bonds=True, smiles=True,
+                                       predicted_molfile=True)  # atoms_bonds and predicted_molfile are optional
 print(predictions)
 ```
 or use [`prediction.ipynb`](prediction.ipynb). You can also change the image and model path to your images and models.

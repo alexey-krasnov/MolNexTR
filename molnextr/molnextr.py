@@ -4,7 +4,7 @@ import platform
 import warnings
 import torch
 import pystow
-from MolNexTR.model import molnextr
+from molnextr.model import MolNexTR
 
 # Suppress unnecessary warnings
 logging.getLogger("absl").setLevel("ERROR")
@@ -46,14 +46,14 @@ class MolNexTRSingleton:
     
     @classmethod
     def get_instance(cls):
-        """Get or create the singleton MolNexTR model instance"""
+        """Get or create the singleton molnextr model instance"""
         if cls._instance is None:
-            logger.info("Initializing MolNexTR singleton for the first time")
+            logger.info("Initializing molnextr singleton for the first time")
             cls._detect_hardware()
             cls._instance = cls._initialize_model()
-            logger.info(f"MolNexTR singleton initialized successfully on {cls._device_name}")
+            logger.info(f"molnextr singleton initialized successfully on {cls._device_name}")
         else:
-            logger.debug("Returning existing MolNexTR singleton instance")
+            logger.debug("Returning existing molnextr singleton instance")
         return cls._instance
     
     @classmethod
@@ -124,7 +124,7 @@ class MolNexTRSingleton:
     
     @classmethod
     def _initialize_model(cls):
-        """Initialize the MolNexTR model only once with the detected device"""
+        """Initialize the molnextr model only once with the detected device"""
         # Set path
         default_path = pystow.join("molnextr")
         model_url = "https://huggingface.co/datasets/CYF200127/MolNexTR/resolve/main/molnextr_best.pth"
@@ -143,18 +143,18 @@ class MolNexTRSingleton:
             logger.info(f"✅ Downloaded model to {model_path}")
         
         # Initialize model with the detected device
-        logger.info(f"🔄 Initializing MolNexTR model on {cls._device_name}")
+        logger.info(f"🔄 Initializing molnextr model on {cls._device_name}")
         
         try:
             # Initialize model on the detected device
-            logger.info(f"Creating MolNexTR model with device {cls._device}...")
+            logger.info(f"Creating molnextr model with device {cls._device}...")
             
             # Add memory tracking for debugging
             if torch.cuda.is_available():
                 logger.info(f"CUDA memory before model init: {torch.cuda.memory_allocated()/1024**2:.2f} MB")
             
             # Create the model
-            model = molnextr(model_path, cls._device)
+            model = MolNexTR(model_path, cls._device)
             
             # For Apple Silicon, ensure model components are on MPS
             if cls._device_name.startswith("Apple Silicon"):
@@ -186,7 +186,7 @@ class MolNexTRSingleton:
             
             # Try one more time with CPU
             logger.info("Attempting to initialize model on CPU...")
-            return molnextr(model_path, cls._device)
+            return MolNexTR(model_path, cls._device)
     
     @classmethod
     def _test_model(cls, model):
@@ -218,8 +218,8 @@ def get_predictions(
     predicted_molfile: bool = False,
 ):
     """
-    Generate predictions from the MolNexTR model for a given chemical structure image.
-    Uses the singleton instance of MolNexTR to avoid loading the model multiple times.
+    Generate predictions from the molnextr model for a given chemical structure image.
+    Uses the singleton instance of molnextr to avoid loading the model multiple times.
     
     Args:
         imagepath: Path to the input image containing the chemical structure.
